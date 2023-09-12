@@ -17,12 +17,25 @@ var today = dayjs().format("ddd, DD MMM YYYY, HH:MM:ss");;
 var currentTime;
 $("#currentDay").text(today);
 
-// On DOM ready update time interval
+// On DOM ready update time interval and populate rows
 $(document).ready(function() {
+  //Time timer
   var timeInterval = setInterval(function(){
     updateTime();
     console.log("what:")
   }, 1000);
+
+hourEvents.forEach(function(eventBlock, index){
+  var timeLabel = eventBlock.time;
+  var blockColor = blockColor(timeLabel);
+  var timeRow =
+      '<div id="'
+      + index + 
+      '" class="row time-block ' 
+      + timeLabel +
+      "><div class="col-2 col-md-1 hour text-center py-3">"'
+      + timeLabel +
+      '"</div><textarea class="col-8 col-md-10 description" rows="3"></textarea><button class="btn saveBtn col-2 col-md-1" aria-label="save"><i class="fas fa-save" aria-hidden="true"></i></button></div>'
 });
 
 // Update current time
@@ -34,7 +47,7 @@ function updateTime() {
 
 // On save click, save item
 $('.saveBtn').on("click", function () {
-  
+   
 });
 // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
